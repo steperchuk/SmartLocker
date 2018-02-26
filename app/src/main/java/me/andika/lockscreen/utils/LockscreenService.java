@@ -30,13 +30,11 @@ public class LockscreenService extends Service {
 
 
 
-
-
     private BroadcastReceiver mLockscreenReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (null != context) {
-                if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+                if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF) || intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
                     startLockscreenActivity();
                 }
             }
@@ -47,6 +45,7 @@ public class LockscreenService extends Service {
         if (isStartRecever) {
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction(Intent.ACTION_TIME_TICK);
             registerReceiver(mLockscreenReceiver, filter);
         } else {
             if (null != mLockscreenReceiver) {
