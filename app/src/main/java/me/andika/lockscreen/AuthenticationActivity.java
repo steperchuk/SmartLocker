@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 /**
@@ -26,7 +27,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
     String password = "";
 
-    ImageButton x_button;
     ImageButton one_button;
     ImageButton two_button;
     ImageButton three_button;
@@ -37,6 +37,13 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     ImageButton eight_button;
     ImageButton nine_button;
     ImageButton zero_button;
+
+    RadioButton button_1;
+    RadioButton button_2;
+    RadioButton button_3;
+    RadioButton button_4;
+    RadioButton button_5;
+    RadioButton button_6;
 
     TextView label;
     EditText password_field;
@@ -51,7 +58,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         label = (TextView) findViewById(R.id.label);
         password_field = (EditText) findViewById(R.id.password_field);
 
-        x_button = (ImageButton) findViewById(R.id.x_button);
         one_button = (ImageButton) findViewById(R.id.one_button);
         two_button = (ImageButton) findViewById(R.id.two_button);
         three_button = (ImageButton) findViewById(R.id.tree_button);
@@ -63,8 +69,14 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         nine_button = (ImageButton) findViewById(R.id.nine_button);
         zero_button = (ImageButton) findViewById(R.id.zero_button);
 
+        button_1 = (RadioButton) findViewById(R.id.radioButton_1);
+        button_2 = (RadioButton) findViewById(R.id.radioButton_2);
+        button_3 = (RadioButton) findViewById(R.id.radioButton_3);
+        button_4 = (RadioButton) findViewById(R.id.radioButton_4);
+        button_5 = (RadioButton) findViewById(R.id.radioButton_5);
+        button_6 = (RadioButton) findViewById(R.id.radioButton_6);
 
-        x_button.setOnClickListener(AuthenticationActivity.this);
+
         one_button.setOnClickListener(AuthenticationActivity.this);
         two_button.setOnClickListener(AuthenticationActivity.this);
         three_button.setOnClickListener(AuthenticationActivity.this);
@@ -76,7 +88,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         nine_button.setOnClickListener(AuthenticationActivity.this);
         zero_button.setOnClickListener(AuthenticationActivity.this);
 
-        x_button.setVisibility(View.INVISIBLE);
 
         animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
 
@@ -84,12 +95,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             label.setText("Введите Пароль");
         }
 
+        skipRadioButtonsStates();
     }
 
     @Override
     public void onClick(View view) {
-
-        x_button.setVisibility(View.VISIBLE);
 
         ImageButton button = (ImageButton)view;
         String buttonText = "";
@@ -125,14 +135,13 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             case R.id.zero_button:
                 buttonText = "0";
                 break;
-            case R.id.x_button:
-                password_field.setText("");
-                break;
         }
+
         label.setText("");
         button.startAnimation(buttonClick);
         password_field.setText(password_field.getText() + buttonText);
 
+        setRadioButtons(password_field.getText().length());
         if(password_field.getText().length() == 6){
             password = password_field.getText().toString();
             if(getPassword() == null){
@@ -165,17 +174,15 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             finish();
         }
         else {
-            x_button.setVisibility(View.INVISIBLE);
             label.setText("Неверный Пароль");
             Animate();
             password_field.setText("");
+            skipRadioButtonsStates();
         }
     }
 
     private void Animate(){
         label.startAnimation(animShake);
-        password_field.startAnimation(animShake);
-        //x_button.startAnimation(animShake);
         one_button.startAnimation(animShake);
         two_button.startAnimation(animShake);
         three_button.startAnimation(animShake);
@@ -186,6 +193,41 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         eight_button.startAnimation(animShake);
         nine_button.startAnimation(animShake);
         zero_button.startAnimation(animShake);
+    }
+
+    private void setRadioButtons(int passLength){
+        switch (passLength){
+            case 0:
+                skipRadioButtonsStates();
+                break;
+            case 1:
+                button_1.setChecked(true);
+                break;
+            case 2:
+                button_2.setChecked(true);
+                break;
+            case 3:
+                button_3.setChecked(true);
+                break;
+            case 4:
+                button_4.setChecked(true);
+                break;
+            case 5:
+                button_5.setChecked(true);
+                break;
+            case 6:
+                button_6.setChecked(true);
+                break;
+        }
+    }
+
+    private void skipRadioButtonsStates(){
+        button_1.setChecked(false);
+        button_2.setChecked(false);
+        button_3.setChecked(false);
+        button_4.setChecked(false);
+        button_5.setChecked(false);
+        button_6.setChecked(false);
     }
 
 }
