@@ -33,6 +33,10 @@ public class MainActivity extends PinActivity {
 
         }
 
+        Intent authenticationIntend = new Intent(getApplicationContext(), AuthenticationActivity.class);
+        authenticationIntend.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(authenticationIntend);
+
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {

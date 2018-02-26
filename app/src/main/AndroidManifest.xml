@@ -27,6 +27,10 @@
             android:theme="@style/AppThemeNoAction">
 
         </activity>
+        <activity
+            android:name="me.andika.lockscreen.AuthenticationActivity"
+            android:theme="@style/AppThemeNoAction">
+        </activity>
         <activity android:name="me.andika.lockscreen.MainActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance">
