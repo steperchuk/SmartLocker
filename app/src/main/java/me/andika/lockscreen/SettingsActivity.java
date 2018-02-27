@@ -14,7 +14,7 @@ import com.github.orangegangsters.lollipin.lib.managers.LockManager;
 
 import me.andika.lockscreen.utils.LockScreen;
 
-public class MainActivity extends PinActivity {
+public class SettingsActivity extends PinActivity {
 
 
     ToggleButton toggleButton;
@@ -25,6 +25,7 @@ public class MainActivity extends PinActivity {
         setContentView(R.layout.activity_main);
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
 
+
         LockScreen.getInstance().init(this,true);
         if(LockScreen.getInstance().isActive()){
             toggleButton.setChecked(true);
@@ -32,10 +33,6 @@ public class MainActivity extends PinActivity {
             toggleButton.setChecked(false);
 
         }
-
-        Intent authenticationIntend = new Intent(getApplicationContext(), AuthenticationActivity.class);
-        authenticationIntend.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(authenticationIntend);
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -50,8 +47,6 @@ public class MainActivity extends PinActivity {
         });
 
     }
-
-
 
 
 

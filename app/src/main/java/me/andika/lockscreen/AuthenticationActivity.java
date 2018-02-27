@@ -1,19 +1,16 @@
 package me.andika.lockscreen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -172,6 +169,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private void validatePassword(String password){
         if(getPassword().equals(password)){
             finish();
+            showSettings();
         }
         else {
             label.setText("Неверный Пароль");
@@ -229,5 +227,12 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         button_5.setChecked(false);
         button_6.setChecked(false);
     }
+
+    private void showSettings(){
+        Intent authenticationIntend = new Intent(getApplicationContext(), SettingsActivity.class);
+        authenticationIntend.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(authenticationIntend);
+    }
+
 
 }

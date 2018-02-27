@@ -17,7 +17,7 @@ import android.util.Log;
 
 import me.andika.lockscreen.LockApplication;
 import me.andika.lockscreen.LockScreenActivity;
-import me.andika.lockscreen.MainActivity;
+import me.andika.lockscreen.SettingsActivity;
 import me.andika.lockscreen.R;
 
 
@@ -106,7 +106,7 @@ public class LockscreenService extends Service {
     private void showNotification() {
         CharSequence text = "Running";
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+                new Intent(this, SettingsActivity.class), 0);
 
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
