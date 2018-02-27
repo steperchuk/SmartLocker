@@ -1,16 +1,10 @@
 package me.andika.lockscreen;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import com.github.orangegangsters.lollipin.lib.PinActivity;
-import com.github.orangegangsters.lollipin.lib.managers.AppLock;
-import com.github.orangegangsters.lollipin.lib.managers.LockManager;
 
 import me.andika.lockscreen.utils.LockScreen;
 
@@ -22,7 +16,7 @@ public class SettingsActivity extends PinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
 
 

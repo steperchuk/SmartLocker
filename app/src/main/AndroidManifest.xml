@@ -36,7 +36,7 @@
             android:launchMode="singleInstance"
             android:theme="@style/AppThemeNoAction">
         </activity>
-        
+
         <activity android:name="me.andika.lockscreen.SettingsActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance">
