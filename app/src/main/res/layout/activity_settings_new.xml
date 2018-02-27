@@ -90,16 +90,18 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:text="Предметы"
+            android:layout_weight="20"
             android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/button_subjects_list"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="100dp"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_right_arrow"/>
+            app:srcCompat="@drawable/ic_right_arrow" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,14 +117,16 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:text="Статистика"
+            android:layout_weight="20"
             android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/button_statistics"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="100dp"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_right_arrow"/>
     </LinearLayout>
@@ -139,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
+            android:layout_weight="20"
             android:text="Смена пароля"
             android:textSize="18sp" />
 
@@ -146,7 +151,8 @@
             android:id="@+id/button_change_password"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="100dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_right_arrow"/>
