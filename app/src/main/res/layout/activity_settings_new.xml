@@ -25,9 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="25dp"
             android:switchPadding="10dp"
-            android:text="Switch"
+            android:text="Off"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
             android:textSize="18sp" />
@@ -36,7 +36,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="30dp">
 
         <TextView
             android:id="@+id/textView2"
@@ -58,7 +58,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="30dp">
 
         <TextView
             android:id="@+id/textView3"
@@ -80,7 +80,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -107,7 +107,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -134,7 +134,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -163,6 +163,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_lock"/>
 
