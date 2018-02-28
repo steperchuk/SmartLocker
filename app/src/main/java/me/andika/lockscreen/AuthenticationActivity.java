@@ -43,7 +43,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     RadioButton button_6;
 
     TextView label;
-    EditText password_field;
 
 
     @Override
@@ -53,7 +52,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_authentication);
 
         label = (TextView) findViewById(R.id.label);
-        password_field = (EditText) findViewById(R.id.password_field);
 
         one_button = (ImageButton) findViewById(R.id.one_button);
         two_button = (ImageButton) findViewById(R.id.two_button);
@@ -136,11 +134,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         label.setText("");
         button.startAnimation(buttonClick);
-        password_field.setText(password_field.getText() + buttonText);
+        password = password + buttonText;
+        int passwordLenght = password.length();
 
-        setRadioButtons(password_field.getText().length());
-        if(password_field.getText().length() == 6){
-            password = password_field.getText().toString();
+        setRadioButtons(password.length());
+        if(passwordLenght == 6){
             if(getPassword() == null){
                 savePassword(password);
                 finish();
@@ -166,15 +164,15 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         return password;
     }
 
-    private void validatePassword(String password){
-        if(getPassword().equals(password)){
+    private void validatePassword(String value){
+        if(getPassword().equals(value)){
             finish();
             showSettings();
         }
         else {
             label.setText("Неверный Пароль");
             Animate();
-            password_field.setText("");
+            password = "";
             skipRadioButtonsStates();
         }
     }

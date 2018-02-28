@@ -43,7 +43,6 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
         setContentView(R.layout.activity_lock_screen);
 
-        subject = (TextView) findViewById(R.id.subject_Title);
         question = (TextView) findViewById(R.id.question);
 
         image = (ImageView) findViewById(R.id.imageQuestion);
