@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
-            android:text="Класс"
+            android:text="Уровень"
             android:textSize="16sp" />
 
         <Spinner
@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -95,8 +96,8 @@
 
         <ImageButton
             android:id="@+id/button_subjects_list"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
@@ -122,8 +123,8 @@
 
         <ImageButton
             android:id="@+id/button_statistics"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
@@ -149,8 +150,8 @@
 
         <ImageButton
             android:id="@+id/button_change_password"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"

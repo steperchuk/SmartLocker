@@ -141,7 +141,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         if(passwordLenght == 6){
             if(getPassword() == null){
                 savePassword(password);
-                finish();
+                showSettings();
             }
             else {
                 validatePassword(password);
@@ -227,9 +227,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void showSettings(){
-        Intent authenticationIntend = new Intent(getApplicationContext(), SettingsActivity.class);
-        authenticationIntend.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(authenticationIntend);
+        Intent settings = new Intent(getApplicationContext(), SettingsActivity.class);
+        settings.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(settings);
     }
 
 

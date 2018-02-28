@@ -1,21 +1,26 @@
 package me.andika.lockscreen;
 
-import android.media.Image;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.ToggleButton;
-
-import com.github.orangegangsters.lollipin.lib.PinActivity;
 
 import me.andika.lockscreen.utils.LockScreen;
 
-public class SettingsActivity extends PinActivity implements View.OnClickListener {
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean enableService;
+
+    private String[] klasses = new String[] { "1 класс", "2 класс", "3 класс", "4 класс", "5 класс", "6 класс", "7 класс" };
+
+    private String[] intervals = new String[] { "15 мин", "30 мин", "45 мин", "60 мин", "90 мин"};
 
     Switch enableServiceSwitch;
     Spinner intervalSpinner;
@@ -44,15 +49,28 @@ public class SettingsActivity extends PinActivity implements View.OnClickListene
         changePassButton.setOnClickListener(SettingsActivity.this);
         startButton.setOnClickListener(SettingsActivity.this);
 
+
+        ArrayAdapter<String> klassesAddapter = new ArrayAdapter<String>(this, R.layout.styled_spinner, klasses);
+        klassesAddapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        klassSpinner.setAdapter(klassesAddapter);
+
+        ArrayAdapter<String> intervalsAddapter = new ArrayAdapter<String>(this, R.layout.styled_spinner, intervals);
+        intervalsAddapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        intervalSpinner.setAdapter(intervalsAddapter);
+
+        enableServiceSwitch.setChecked(getServiceState());
+        intervalSpinner.setSelection((int)getInterval());
+        klassSpinner.setSelection((int)getLevel());
+
+
         LockScreen.getInstance().init(this,true);
         if(LockScreen.getInstance().isActive()){
             enableServiceSwitch.setChecked(true);
+            enableServiceSwitch.setText("On");
         }else{
             enableServiceSwitch.setChecked(false);
-
+            enableServiceSwitch.setText("Off");
         }
-
-
 
 
         enableServiceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -60,8 +78,10 @@ public class SettingsActivity extends PinActivity implements View.OnClickListene
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if(checked){
                     enableService = true;
+                    enableServiceSwitch.setText("On");
                 }else{
                     enableService = false;
+                    enableServiceSwitch.setText("Off");
                 }
             }
         });
@@ -82,24 +102,63 @@ public class SettingsActivity extends PinActivity implements View.OnClickListene
 
                 break;
             case R.id.button_change_password:
-
-
+                dropPassword();
+                showAuthentication();
                 break;
             case R.id.startButton:
                 EnableService(enableService);
-
+                saveSettings();
+                finish();
                 break;
             }
 
         }
 
-        private void EnableService(boolean enableService){
-            if(enableService){
+        private void EnableService(boolean serviceState){
+            if(serviceState){
                 LockScreen.getInstance().active();
             }
             else {
                 LockScreen.getInstance().deactivate();
             }
         }
+
+    private void saveSettings(){
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("serviceState", enableServiceSwitch.isChecked());
+        editor.putLong("klass", klassSpinner.getSelectedItemId());
+        editor.putLong("interval", intervalSpinner.getSelectedItemId());
+        editor.commit();
+    }
+
+    private boolean getServiceState(){
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        return sharedPref.getBoolean("serviceState", false);
+    }
+
+    private long getLevel(){
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        return sharedPref.getLong("klass", 0);
+    }
+
+    private long getInterval(){
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        return sharedPref.getLong("interval", 0);
+    }
+
+    private void dropPassword(){
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("password");
+        editor.putString("password", null);
+        editor.commit();
+    }
+
+    private void showAuthentication(){
+        Intent authentication = new Intent(getApplicationContext(), AuthenticationActivity.class);
+        authentication.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(authentication);
+    }
 
 }
