@@ -108,7 +108,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             case R.id.startButton:
                 EnableService(enableService);
                 saveSettings();
-                finish();
+                showDesktop();
                 break;
             }
 
@@ -148,9 +148,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void dropPassword(){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("PasswordPreferences",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove("password");
+        editor.remove("password").commit();
         editor.putString("password", null);
         editor.commit();
     }
@@ -159,6 +159,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         Intent authentication = new Intent(getApplicationContext(), AuthenticationActivity.class);
         authentication.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(authentication);
+    }
+
+    private void showDesktop(){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }

@@ -89,6 +89,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         if(getPassword() != null){
             label.setText("Введите Пароль");
         }
+        else {
+            label.setText("Укажите родительский пароль");
+        }
 
         skipRadioButtonsStates();
     }
@@ -152,14 +155,14 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.2F);
 
     private void savePassword(String password){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("PasswordPreferences",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("password", password);
         editor.commit();
     }
 
     private String getPassword(){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("PasswordPreferences",Context.MODE_PRIVATE);
         String password = sharedPref.getString("password", null);
         return password;
     }
