@@ -12,8 +12,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import me.andika.lockscreen.LockApplication;
 import me.andika.lockscreen.LockScreenActivity;
@@ -25,6 +29,7 @@ public class LockscreenService extends Service {
     private final String TAG = "LockscreenService";
     private int mServiceStartId = 0;
     private Context mContext = null;
+    public int counter = 0;   // need to use global or preferences
 
     private NotificationManager mNM;
 
@@ -34,7 +39,10 @@ public class LockscreenService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (null != context) {
-                if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF) || intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+                if (//intent.getAction().equals(Intent.ACTION_SCREEN_OFF) || //
+                        intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+
+                    counter++;
                     startLockscreenActivity();
                 }
             }
@@ -44,7 +52,7 @@ public class LockscreenService extends Service {
     private void stateRecever(boolean isStartRecever) {
         if (isStartRecever) {
             IntentFilter filter = new IntentFilter();
-            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            //filter.addAction(Intent.ACTION_SCREEN_OFF);
             filter.addAction(Intent.ACTION_TIME_TICK);
             registerReceiver(mLockscreenReceiver, filter);
         } else {
@@ -70,7 +78,6 @@ public class LockscreenService extends Service {
         stateRecever(true);
         Intent bundleIntet = intent;
         if (null != bundleIntet) {
-           // startLockscreenActivity();
             Log.d(TAG, TAG + " onStartCommand intent  existed");
         } else {
             Log.d(TAG, TAG + " onStartCommand intent NOT existed");
@@ -95,9 +102,9 @@ public class LockscreenService extends Service {
     }
 
     private void startLockscreenActivity() {
-        Intent startLockscreenActIntent = new Intent(mContext, LockScreenActivity.class);
-        startLockscreenActIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startLockscreenActIntent);
+        if(shouldShowLockScreen()){
+            showLockScreen();
+        }
     }
 
     /**
@@ -119,6 +126,27 @@ public class LockscreenService extends Service {
                 .build();
 
         mNM.notify(((LockApplication) getApplication()).notificationId, notification);
+    }
+
+    private boolean shouldShowLockScreen(){
+        if(counter == getIntervalValue()){
+            counter = 0;
+            return true;
+        }
+        return false;
+    }
+
+    private void showLockScreen(){
+        Intent startLockscreenActIntent = new Intent(mContext, LockScreenActivity.class);
+        startLockscreenActIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startLockscreenActIntent);
+    }
+
+
+    private int getIntervalValue(){
+        SharedPreferences sharedPref = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        String intervalValue = sharedPref.getString("intervalValue", null);
+        return Integer.parseInt(intervalValue.replace(" мин",""));
     }
 
 }

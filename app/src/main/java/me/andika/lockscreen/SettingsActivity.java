@@ -20,7 +20,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private String[] klasses = new String[] { "1 класс", "2 класс", "3 класс", "4 класс", "5 класс", "6 класс", "7 класс" };
 
-    private String[] intervals = new String[] { "15 мин", "30 мин", "45 мин", "60 мин", "90 мин"};
+    private String[] intervals = new String[] { "1 мин", "15 мин", "30 мин", "45 мин", "60 мин", "90 мин"};
 
     Switch enableServiceSwitch;
     Spinner intervalSpinner;
@@ -51,11 +51,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
 
         ArrayAdapter<String> klassesAddapter = new ArrayAdapter<String>(this, R.layout.styled_spinner, klasses);
-        klassesAddapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        klassesAddapter.setDropDownViewResource(R.layout.checkedlistview);
         klassSpinner.setAdapter(klassesAddapter);
 
         ArrayAdapter<String> intervalsAddapter = new ArrayAdapter<String>(this, R.layout.styled_spinner, intervals);
-        intervalsAddapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        intervalsAddapter.setDropDownViewResource(R.layout.checkedlistview);
         intervalSpinner.setAdapter(intervalsAddapter);
 
         enableServiceSwitch.setChecked(getServiceState());
@@ -124,26 +124,27 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
 
     private void saveSettings(){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("Preferences",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("serviceState", enableServiceSwitch.isChecked());
         editor.putLong("klass", klassSpinner.getSelectedItemId());
         editor.putLong("interval", intervalSpinner.getSelectedItemId());
+        editor.putString("intervalValue", intervalSpinner.getSelectedItem().toString());
         editor.commit();
     }
 
     private boolean getServiceState(){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("Preferences",Context.MODE_PRIVATE);
         return sharedPref.getBoolean("serviceState", false);
     }
 
     private long getLevel(){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("Preferences",Context.MODE_PRIVATE);
         return sharedPref.getLong("klass", 0);
     }
 
     private long getInterval(){
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("Preferences",Context.MODE_PRIVATE);
         return sharedPref.getLong("interval", 0);
     }
 
