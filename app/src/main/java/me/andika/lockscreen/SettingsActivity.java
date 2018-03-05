@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -88,12 +89,16 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.2F);
+
     @Override
     public void onClick(View view) {
 
         ImageButton button = (ImageButton)view;
+        button.startAnimation(buttonClick);
 
         switch (button.getId()){
+
             case R.id.button_subjects_list:
 
                 break;
