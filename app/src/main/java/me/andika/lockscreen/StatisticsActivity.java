@@ -22,7 +22,7 @@ public class StatisticsActivity extends Activity {
 
     Integer[] imgid= {R.drawable.ic_lock,R.drawable.ic_lock,R.drawable.ic_lock};
 
-    String[] statistics = {"12/157", "2/34", "3/56"};
+    String[] statistics = {"12 из 157", "2 из 34", "3 из 56"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

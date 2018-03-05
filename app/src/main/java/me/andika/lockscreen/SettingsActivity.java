@@ -118,6 +118,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
+    @Override
+    public void onBackPressed() {
+        showDesktop();
+    }
+
         private void EnableService(boolean serviceState){
             if(serviceState){
                 LockScreen.getInstance().active();
@@ -162,26 +167,27 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private void showAuthentication(){
         Intent authentication = new Intent(getApplicationContext(), AuthenticationActivity.class);
-        authentication.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        authentication.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(authentication);
     }
 
     private void showDesktop(){
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     private void showSubjects(){
         Intent subjects = new Intent(getApplicationContext(), SubjectsActivity.class);
-        subjects.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        subjects.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(subjects);
     }
 
     private void showStatistics(){
         Intent statistics = new Intent(getApplicationContext(), StatisticsActivity.class);
-        statistics.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        statistics.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(statistics);
     }
 

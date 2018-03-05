@@ -231,8 +231,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
     private void showSettings(){
         Intent settings = new Intent(getApplicationContext(), SettingsActivity.class);
-        settings.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        settings.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(settings);
+        finish();
     }
 
 
