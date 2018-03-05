@@ -9,11 +9,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SubjectsActivity extends Activity {
+public class StatisticsActivity extends Activity {
 
     ListView list;
-    CheckBox stateCheckbox;
-    ImageButton saveButton;
 
     String[] subjects =
     {
@@ -23,27 +21,17 @@ public class SubjectsActivity extends Activity {
     };
 
     Integer[] imgid= {R.drawable.ic_lock,R.drawable.ic_lock,R.drawable.ic_lock};
-    Boolean[] states= {false, true, false};
 
+    String[] statistics = {"12/157", "2/34", "3/56"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subjects);
+        setContentView(R.layout.activity_statistics);
 
-        saveButton = (ImageButton)findViewById(R.id.save_button);
-        View.OnClickListener saveButtonOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Save settings (states array)
-            }
-        };
-        saveButton.setOnClickListener(saveButtonOnClick);
+        list = (ListView) findViewById(R.id.statistics_list);
 
-        list = (ListView) findViewById(R.id.subjects_list);
-        stateCheckbox = (CheckBox) findViewById(R.id.state_checkbox);
-
-        SubjectsListAdapter adapter=new SubjectsListAdapter(this, subjects, imgid, states);
+        StatisticsListAdapter adapter=new StatisticsListAdapter(this, subjects, imgid, statistics);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,9 +40,6 @@ public class SubjectsActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String Slecteditem= subjects[+position];
-                CheckBox stateCheckbox = (CheckBox)view.findViewById(R.id.state_checkbox);
-                stateCheckbox.setChecked(!stateCheckbox.isChecked());
-                states[position] = stateCheckbox.isChecked();
                 Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
             }
         });

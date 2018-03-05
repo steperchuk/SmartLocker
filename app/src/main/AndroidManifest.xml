@@ -47,6 +47,11 @@
             android:launchMode="singleInstance">
         </activity>
 
+        <activity android:name="me.andika.lockscreen.StatisticsActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance">
+        </activity>
+
         <service android:name="me.andika.lockscreen.utils.LockscreenService" >
         </service>
 

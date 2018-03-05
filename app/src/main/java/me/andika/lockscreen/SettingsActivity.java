@@ -103,8 +103,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 showSubjects();
                 break;
             case R.id.button_statistics:
-
-
+                showStatistics();
                 break;
             case R.id.button_change_password:
                 dropPassword();
@@ -175,9 +174,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void showSubjects(){
-        Intent authentication = new Intent(getApplicationContext(), SubjectsActivity.class);
-        authentication.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(authentication);
+        Intent subjects = new Intent(getApplicationContext(), SubjectsActivity.class);
+        subjects.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(subjects);
+    }
+
+    private void showStatistics(){
+        Intent statistics = new Intent(getApplicationContext(), StatisticsActivity.class);
+        statistics.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(statistics);
     }
 
 }
