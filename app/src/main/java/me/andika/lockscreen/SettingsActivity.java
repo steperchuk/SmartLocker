@@ -100,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         switch (button.getId()){
 
             case R.id.button_subjects_list:
-
+                showSubjects();
                 break;
             case R.id.button_statistics:
 
@@ -172,6 +172,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void showSubjects(){
+        Intent authentication = new Intent(getApplicationContext(), SubjectsActivity.class);
+        authentication.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(authentication);
     }
 
 }
