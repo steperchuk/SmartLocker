@@ -3,6 +3,8 @@ package me.andika.lockscreen;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.widget.Switch;
 import me.andika.lockscreen.utils.LockScreen;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+
+    DatabaseHelper databaseHelper;
 
     private boolean enableService;
 
@@ -35,6 +39,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        databaseHelper.create_db();
 
         enableServiceSwitch = (Switch) findViewById(R.id.switch_enable_service);
         intervalSpinner = (Spinner) findViewById(R.id.spinner_interval);
@@ -100,9 +108,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         switch (button.getId()){
 
             case R.id.button_subjects_list:
+                saveKlass();
                 showSubjects();
                 break;
             case R.id.button_statistics:
+                saveKlass();
                 showStatistics();
                 break;
             case R.id.button_change_password:
@@ -137,8 +147,16 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("serviceState", enableServiceSwitch.isChecked());
         editor.putLong("klass", klassSpinner.getSelectedItemId());
+        editor.putString("klass_value", klassSpinner.getSelectedItem().toString());
         editor.putLong("interval", intervalSpinner.getSelectedItemId());
         editor.putString("intervalValue", intervalSpinner.getSelectedItem().toString());
+        editor.commit();
+    }
+
+    private void saveKlass(){
+        SharedPreferences sharedPref = getSharedPreferences("Preferences",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("klass_value", klassSpinner.getSelectedItem().toString());
         editor.commit();
     }
 

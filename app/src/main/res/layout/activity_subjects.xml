@@ -5,24 +5,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-
         <ListView
             android:id="@+id/subjects_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             />
-
-        <ImageButton
-            android:id="@+id/save_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"
-            android:background="@null"
-            android:src="@drawable/ic_lock"/>
 </RelativeLayout>

@@ -1,9 +1,7 @@
 package me.andika.lockscreen;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,18 +11,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import static me.andika.lockscreen.R.color.colorAccent;
+import java.util.List;
+import java.util.Random;
 
 
 public class LockScreenActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public String correctAnswer = "2";
-
-    TextView subject;
-    TextView question;
-
+    String correctAnswer;
+    TextView questionLabel;
     ImageView image;
 
     Button answer_A_Button;
@@ -40,23 +34,35 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_lock_screen);
 
-        question = (TextView) findViewById(R.id.question);
+        Queries queries = new Queries(getApplicationContext());
+        String klass = queries.getKlass();
+        List<Question> questions = queries.getQuestions(klass);
+        Question question = getRandomQuestion(questions);
+
+        questionLabel = (TextView) findViewById(R.id.question);
+        questionLabel.setText(question.Question);
 
         image = (ImageView) findViewById(R.id.imageQuestion);
 
         answer_A_Button = (Button) findViewById(R.id.answer_A_Button);
+        answer_A_Button.setText(question.Answer_A);
         answer_B_Button = (Button) findViewById(R.id.answer_B_Button);
+        answer_B_Button.setText(question.Answer_B);
         answer_C_Button = (Button) findViewById(R.id.answer_C_Button);
+        answer_C_Button.setText(question.Answer_C);
         answer_D_Button = (Button) findViewById(R.id.answer_D_Button);
+        answer_D_Button.setText(question.Answer_D);
 
         result = (TextView) findViewById(R.id.answer_Result);
         resultText = (TextView) findViewById(R.id.answer_Text);
+        resultText.setText(question.Answer_Info);
 
         result.setVisibility(View.INVISIBLE);
         resultText.setVisibility(View.INVISIBLE);
+
+        correctAnswer = question.Correct_Answer;
 
         animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
 
@@ -116,5 +122,13 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
+    }
+
+
+    private Question getRandomQuestion(List<Question> questions){
+
+        Question question = questions.get((new Random()).nextInt(questions.size()));
+
+        return question;
     }
 }

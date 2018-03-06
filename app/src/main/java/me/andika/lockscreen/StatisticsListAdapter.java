@@ -1,6 +1,7 @@
 package me.andika.lockscreen;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +11,21 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class StatisticsListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final String[] subject;
-    private final String[] statistics;
-    private final Integer[] imgid;
+    private final List<String> subject;
+    private final List<Drawable> image;
+    private final List<String> statistics;
 
-    public StatisticsListAdapter(Activity context, String[] subjects, Integer[] imgid, String[] statistics) {
+    public StatisticsListAdapter(Activity context, List<String> subjects, List<Drawable> image, List<String> statistics) {
         super(context, R.layout.statistics_list_item, subjects);
 
         this.context=context;
         this.subject =subjects;
-        this.imgid=imgid;
+        this.image=image;
         this.statistics =statistics;
     }
 
@@ -34,9 +37,9 @@ public class StatisticsListAdapter extends ArrayAdapter<String> {
         TextView statisticsTxt = (TextView) rowView.findViewById(R.id.statistic);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
-        subjectTxt.setText(this.subject[position]);
-        statisticsTxt.setText(this.statistics[position]);
-        imageView.setImageResource(imgid[position]);
+        subjectTxt.setText(this.subject.get(position));
+        //statisticsTxt.setText(this.statistics.get(position));
+        imageView.setImageDrawable(this.image.get(position));
         return rowView;
     };
 }
