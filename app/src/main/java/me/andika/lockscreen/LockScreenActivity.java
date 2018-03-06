@@ -21,6 +21,11 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     TextView questionLabel;
     ImageView image;
 
+    List<Question> questions;
+    Question question;
+
+    Queries queries;
+
     Button answer_A_Button;
     Button answer_B_Button;
     Button answer_C_Button;
@@ -36,10 +41,10 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_screen);
 
-        Queries queries = new Queries(getApplicationContext());
+        queries = new Queries(getApplicationContext());
         String klass = queries.getKlass();
-        List<Question> questions = queries.getQuestions(klass);
-        Question question = getRandomQuestion(questions);
+        questions = queries.getQuestions(klass);
+        question = getRandomQuestion(questions);
 
         questionLabel = (TextView) findViewById(R.id.question);
         questionLabel.setText(question.Question);
@@ -47,12 +52,12 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         image = (ImageView) findViewById(R.id.imageQuestion);
 
         answer_A_Button = (Button) findViewById(R.id.answer_A_Button);
-        answer_A_Button.setText(question.Answer_A);
         answer_B_Button = (Button) findViewById(R.id.answer_B_Button);
-        answer_B_Button.setText(question.Answer_B);
         answer_C_Button = (Button) findViewById(R.id.answer_C_Button);
-        answer_C_Button.setText(question.Answer_C);
         answer_D_Button = (Button) findViewById(R.id.answer_D_Button);
+        answer_A_Button.setText(question.Answer_A);
+        answer_B_Button.setText(question.Answer_B);
+        answer_C_Button.setText(question.Answer_C);
         answer_D_Button.setText(question.Answer_D);
 
         result = (TextView) findViewById(R.id.answer_Result);
@@ -79,6 +84,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         String buttonText = button.getText().toString();
 
         if(buttonText.equals(correctAnswer)){
+            //queries.updateAnswerState(question.Table, true, question.Question);
+            
             finish();
         }
         else
@@ -86,6 +93,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             result.setVisibility(View.VISIBLE);
             resultText.setVisibility(View.VISIBLE);
             button.startAnimation(animShake);
+
+            //setNextQuestion();
         }
     }
 
@@ -130,5 +139,17 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         Question question = questions.get((new Random()).nextInt(questions.size()));
 
         return question;
+    }
+
+    private void setNextQuestion(){
+        question = getRandomQuestion(questions);
+        questionLabel.setText(question.Question);
+        answer_A_Button.setText(question.Answer_A);
+        answer_B_Button.setText(question.Answer_B);
+        answer_C_Button.setText(question.Answer_C);
+        answer_D_Button.setText(question.Answer_D);
+
+        resultText.setText(question.Answer_Info);
+        correctAnswer = question.Correct_Answer;
     }
 }

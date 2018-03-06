@@ -14,4 +14,6 @@ public class Question {
     String Correct_Answer;
     String Answer_Info;
     String Image;
+    String Table;
+    String IsAnswered;
 }

@@ -124,6 +124,7 @@ public class Queries {
                 do {
                     Question question = new Question();
 
+                    question.Table = questionsTable;
                     question.Question = userCursor.getString(userCursor.getColumnIndex("Question"));
                     question.Answer_A = userCursor.getString(userCursor.getColumnIndex("Answer_A"));
                     question.Answer_B = userCursor.getString(userCursor.getColumnIndex("Answer_B"));
@@ -132,6 +133,8 @@ public class Queries {
                     question.Correct_Answer = userCursor.getString(userCursor.getColumnIndex("Correct_Answer"));
                     question.Answer_Info = userCursor.getString(userCursor.getColumnIndex("Answer_Info"));
                     question.Image = userCursor.getString(userCursor.getColumnIndex("Image_URL"));
+                    question.IsAnswered = userCursor.getString(userCursor.getColumnIndex("IsAnswered"));
+
 
                     questions.add(question);
 
@@ -147,6 +150,17 @@ public class Queries {
         final int resourceId = resources.getIdentifier(name, "drawable",
                 context.getPackageName());
         return resources.getDrawable(resourceId);
+    }
+
+    public void updateAnswerState(String tableName ,Boolean state, String question){
+
+        openDBConnection();
+
+        ContentValues cv = new ContentValues();
+        cv.put("IsAnswered", state.toString());
+        int a = db.update(tableName, cv, "Question = ?", new String[]{question});
+
+        closeDBConnection();
     }
 
     private void openDBConnection(){
