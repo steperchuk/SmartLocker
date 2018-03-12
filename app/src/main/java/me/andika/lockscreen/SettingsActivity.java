@@ -14,6 +14,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import javax.xml.datatype.Duration;
 
 import me.andika.lockscreen.utils.LockScreen;
 
@@ -85,17 +88,33 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         enableServiceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                if(checked){
-                    enableService = true;
-                    enableServiceSwitch.setText("On");
-                }else{
-                    enableService = false;
-                    enableServiceSwitch.setText("Off");
-                }
+                    if (checked) {
+                        enableService = true;
+                        enableServiceSwitch.setText("On");
+
+                    } else {
+                        enableService = false;
+                        enableServiceSwitch.setText("Off");
+                    }
+
             }
         });
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*
+        Queries queries = new Queries(getApplicationContext());
+        if (queries.isSubjectsSelected()) {
+            enableServiceSwitch.setChecked(false);
+            enableService = false;
+            enableServiceSwitch.setText("Off");
+            Toast.makeText(getApplicationContext(), "Предметы не выбраны", Toast.LENGTH_SHORT).show();
+        }
+        */
+    }
+
 
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.2F);
 
@@ -113,7 +132,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.button_statistics:
                 saveKlass();
-                showStatistics();
+                Queries queries = new Queries(getApplicationContext());
+                int selectedSubjectsCount = queries.getSelectedSubjectsNames(queries.getKlass()).size();
+                if (selectedSubjectsCount > 0){
+                    showStatistics();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Предметы не выбраны", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.button_change_password:
                 dropPassword();

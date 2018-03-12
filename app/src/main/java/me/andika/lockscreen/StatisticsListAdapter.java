@@ -23,10 +23,10 @@ public class StatisticsListAdapter extends ArrayAdapter<String> {
     public StatisticsListAdapter(Activity context, List<String> subjects, List<Drawable> image, List<String> statistics) {
         super(context, R.layout.statistics_list_item, subjects);
 
-        this.context=context;
-        this.subject =subjects;
-        this.image=image;
-        this.statistics =statistics;
+        this.context = context;
+        this.subject = subjects;
+        this.image = image;
+        this.statistics = statistics;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
@@ -38,7 +38,7 @@ public class StatisticsListAdapter extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
         subjectTxt.setText(this.subject.get(position));
-        //statisticsTxt.setText(this.statistics.get(position));
+        statisticsTxt.setText(this.statistics.get(position));
         imageView.setImageDrawable(this.image.get(position));
         return rowView;
     };

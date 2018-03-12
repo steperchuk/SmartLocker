@@ -19,6 +19,8 @@ public class StatisticsActivity extends Activity {
 
     List<String> subjects = new ArrayList<>();
     List<Drawable> images = new ArrayList<>();
+    List<Integer> answersCount = new ArrayList<>();
+    List<Integer> correctAnswersCount = new ArrayList<>();
     List<String> statistics = new ArrayList<>(); //{"12 из 157", "2 из 34", "3 из 56"};
 
     @Override
@@ -30,27 +32,17 @@ public class StatisticsActivity extends Activity {
 
         final Queries queries = new Queries(getApplicationContext());
         final String klass = queries.getKlass();
-        subjects = queries.getSubjectsNames(klass);
-        images = queries.getSubjectsImages(klass);
+        subjects = queries.getSelectedSubjectsNames(klass);
+        images = queries.getSelectedSubjectsImages(klass);
+        answersCount = queries.getSubjectAnswersCount(klass);
+        correctAnswersCount = queries.getSubjectCorrectAnswersCount(klass);
 
+        for(int i = 0 ; i < subjects.size(); i++){
+            statistics.add(correctAnswersCount.get(i) + " из " + answersCount.get(i));
+        }
 
         StatisticsListAdapter adapter=new StatisticsListAdapter(this, subjects, images, statistics);
         list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                String Slecteditem= subjects.get(+position);
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
-
-
-
-
-
 }

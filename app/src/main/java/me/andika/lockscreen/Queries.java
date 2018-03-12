@@ -2,6 +2,7 @@ package me.andika.lockscreen;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -109,14 +110,49 @@ public class Queries {
         return tables;
     }
 
+    public List<String> getSelectedSubjectsNames(String klass){
+        List<String> names = new ArrayList<>();
+        openDBConnection();
+
+        userCursor =  db.rawQuery("select * from " + klass + " where Selected =? ", new String[]{"true"});
+
+        if (userCursor.moveToFirst()) {
+            do {
+                names.add(userCursor.getString(userCursor.getColumnIndex("Name")));
+            } while (userCursor.moveToNext());
+        }
+
+        closeDBConnection();
+
+        return names;
+    }
+
+    public List<Drawable> getSelectedSubjectsImages(String klass) {
+
+        List<Drawable> images = new ArrayList<>();
+        openDBConnection();
+        userCursor =  db.rawQuery("select * from " + klass + " where Selected =? ", new String[]{"true"});
+
+        if (userCursor.moveToFirst()) {
+            do {
+                String imageName = userCursor.getString(userCursor.getColumnIndex("Image"));
+                images.add(getDrawableResourceByName(imageName));
+            } while (userCursor.moveToNext());
+        }
+
+        closeDBConnection();
+
+        return images;
+    }
+
     public List<Question> getQuestions(String klass){
-        List<String> sugbjectsTables = getSubjectsTables(klass);
+        List<String> subjectsTables = getSubjectsTables(klass);
         List<Question> questions = new ArrayList<>();
 
         openDBConnection();
 
-        for (int i = 0; i < sugbjectsTables.size(); i++) {
-            String questionsTable = sugbjectsTables.get(i);
+        for (int i = 0; i < subjectsTables.size(); i++) {
+            String questionsTable = subjectsTables.get(i);
 
             userCursor =  db.rawQuery("select * from " + questionsTable, null);
 
@@ -161,6 +197,46 @@ public class Queries {
         int a = db.update(tableName, cv, "Question = ?", new String[]{question});
 
         closeDBConnection();
+    }
+
+    public List<Integer> getSubjectCorrectAnswersCount(String klass){
+        List<String> subjectsTables = getSubjectsTables(klass);
+        List<Integer> correctAnswersCount = new ArrayList<>();
+
+        openDBConnection();
+
+        for (int i = 0; i < subjectsTables.size(); i++) {
+            String questionsTable = subjectsTables.get(i);
+
+            userCursor =  db.rawQuery("select * from " + questionsTable + " where IsAnswered =? ", new String[]{"true"} );
+
+            correctAnswersCount.add(userCursor.getCount());
+
+            }
+
+            closeDBConnection();
+
+            return correctAnswersCount;
+    }
+
+    public List<Integer> getSubjectAnswersCount(String klass){
+        List<String> subjectsTables = getSubjectsTables(klass);
+        List<Integer> answersCount = new ArrayList<>();
+
+        openDBConnection();
+
+        for (int i = 0; i < subjectsTables.size(); i++) {
+            String questionsTable = subjectsTables.get(i);
+
+            userCursor =  db.rawQuery("select * from " + questionsTable, null);
+
+            answersCount.add(userCursor.getCount());
+
+        }
+
+        closeDBConnection();
+
+        return answersCount;
     }
 
     private void openDBConnection(){
@@ -218,5 +294,17 @@ public class Queries {
         SharedPreferences sharedPref = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
         String intervalValue = sharedPref.getString("tempInterval", null);
         return Integer.parseInt(intervalValue.replace(" мин",""));
+    }
+
+    public boolean isSubjectsSelected(){
+        int selectedItemsCount = getSelectedSubjectsNames(getKlass()).size();
+        if(selectedItemsCount == 1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

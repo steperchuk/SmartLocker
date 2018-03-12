@@ -36,6 +36,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     TextView result;
     TextView resultText;
 
+    TextView counter;
+
     Animation animShake;
 
     @Override
@@ -78,6 +80,12 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_C_Button.setOnClickListener(LockScreenActivity.this);
         answer_D_Button.setOnClickListener(LockScreenActivity.this);
 
+        // counter disabled. Think it is redundant
+        counter = (TextView) findViewById(R.id.counter_label);
+        counter.setVisibility(View.INVISIBLE);
+        //counter.setText("60");
+        //updateTimeLeftText();
+
         // save 1 min interval
         Queries.saveTempInterval(getApplicationContext(), 1);
 
@@ -90,7 +98,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         String buttonText = button.getText().toString();
 
         if(buttonText.equals(correctAnswer.trim())){
-            //queries.updateAnswerState(question.Table, true, question.Question);
+
+
+            queries.updateAnswerState(question.Table, true, question.Question);
 
             // save selected in settings interval
             queries.saveTempInterval(getApplicationContext(), queries.getIntervalValue(getApplicationContext()));
@@ -181,7 +191,46 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
                 result.setVisibility(View.INVISIBLE);
                 resultText.setVisibility(View.INVISIBLE);
+
+                //uncomment if decide to enable counter
+                //counter.setText("60");
             }
         });
+    }
+
+    private void updateTimeLeftText(){
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int counterValue = Integer.valueOf(counter.getText().toString()) - 1;
+                                if(counterValue >= 0){
+                                    counter.setText(String.valueOf(counterValue));
+                                }
+                                else{
+                                    result.setVisibility(View.VISIBLE);
+                                    resultText.setVisibility(View.VISIBLE);
+                                    setNextQuestion();
+                                }
+
+                                if(counterValue < 10){
+                                    counter.setTextColor(R.color.warning_color);
+                                }
+
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t.start();
     }
 }

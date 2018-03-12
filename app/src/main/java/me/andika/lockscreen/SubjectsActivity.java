@@ -55,13 +55,23 @@ public class SubjectsActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                String Slecteditem = subjects.get(position);
                 CheckBox stateCheckbox = (CheckBox) view.findViewById(R.id.state_checkbox);
                 Boolean state = stateCheckbox.isChecked();
                 stateCheckbox.setChecked(!state);
                 queries.updateSubjectsState(klass, !state, position);
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Queries queries = new Queries(getApplicationContext());
+        int selectedItemsCount = queries.getSelectedSubjectsNames(queries.getKlass()).size();
+        if(selectedItemsCount < 1){
+            Toast.makeText(getApplicationContext(), "Предметы не выбраны", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            finish();
+        }
     }
 }
