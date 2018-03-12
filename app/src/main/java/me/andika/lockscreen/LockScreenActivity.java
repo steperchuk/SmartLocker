@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class LockScreenActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,10 +57,10 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_B_Button = (Button) findViewById(R.id.answer_B_Button);
         answer_C_Button = (Button) findViewById(R.id.answer_C_Button);
         answer_D_Button = (Button) findViewById(R.id.answer_D_Button);
-        answer_A_Button.setText(question.Answer_A);
-        answer_B_Button.setText(question.Answer_B);
-        answer_C_Button.setText(question.Answer_C);
-        answer_D_Button.setText(question.Answer_D);
+        answer_A_Button.setText(question.Answer_A.trim());
+        answer_B_Button.setText(question.Answer_B.trim());
+        answer_C_Button.setText(question.Answer_C.trim());
+        answer_D_Button.setText(question.Answer_D.trim());
 
         result = (TextView) findViewById(R.id.answer_Result);
         resultText = (TextView) findViewById(R.id.answer_Text);
@@ -83,9 +85,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         Button button = (Button)view;
         String buttonText = button.getText().toString();
 
-        if(buttonText.equals(correctAnswer)){
+        if(buttonText.equals(correctAnswer.trim())){
             //queries.updateAnswerState(question.Table, true, question.Question);
-            
+
             finish();
         }
         else
@@ -94,7 +96,7 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             resultText.setVisibility(View.VISIBLE);
             button.startAnimation(animShake);
 
-            //setNextQuestion();
+            setNextQuestion();
         }
     }
 
@@ -142,14 +144,34 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void setNextQuestion(){
-        question = getRandomQuestion(questions);
-        questionLabel.setText(question.Question);
-        answer_A_Button.setText(question.Answer_A);
-        answer_B_Button.setText(question.Answer_B);
-        answer_C_Button.setText(question.Answer_C);
-        answer_D_Button.setText(question.Answer_D);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // this code will be executed after 10 seconds
+                updateUI();
+            }
+        }, 10000);
 
-        resultText.setText(question.Answer_Info);
-        correctAnswer = question.Correct_Answer;
+
+    }
+
+    private void updateUI(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                question = getRandomQuestion(questions);
+                questionLabel.setText(question.Question);
+                answer_A_Button.setText(question.Answer_A.trim());
+                answer_B_Button.setText(question.Answer_B.trim());
+                answer_C_Button.setText(question.Answer_C.trim());
+                answer_D_Button.setText(question.Answer_D.trim());
+
+                resultText.setText(question.Answer_Info);
+                correctAnswer = question.Correct_Answer.trim();
+
+                result.setVisibility(View.INVISIBLE);
+                resultText.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 }
