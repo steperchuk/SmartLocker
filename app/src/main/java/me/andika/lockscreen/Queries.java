@@ -200,4 +200,23 @@ public class Queries {
         }
         return null;
     }
+
+    public static void saveTempInterval(Context context, int interval){
+        SharedPreferences sharedPref = context.getSharedPreferences("Preferences",context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("tempInterval", String.valueOf(interval));
+        editor.commit();
+    }
+
+    public static int getIntervalValue(Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
+        String intervalValue = sharedPref.getString("intervalValue", null);
+        return Integer.parseInt(intervalValue.replace(" мин",""));
+    }
+
+    public static int getTempIntervalValue(Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
+        String intervalValue = sharedPref.getString("tempInterval", null);
+        return Integer.parseInt(intervalValue.replace(" мин",""));
+    }
 }

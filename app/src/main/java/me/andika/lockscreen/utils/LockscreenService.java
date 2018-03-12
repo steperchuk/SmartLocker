@@ -21,6 +21,7 @@ import java.util.Date;
 
 import me.andika.lockscreen.LockApplication;
 import me.andika.lockscreen.LockScreenActivity;
+import me.andika.lockscreen.Queries;
 import me.andika.lockscreen.SettingsActivity;
 import me.andika.lockscreen.R;
 
@@ -129,7 +130,7 @@ public class LockscreenService extends Service {
     }
 
     private boolean shouldShowLockScreen(){
-        if(counter == getIntervalValue()){
+        if(counter == Queries.getTempIntervalValue(getApplicationContext())){
             counter = 0;
             return true;
         }
@@ -142,11 +143,5 @@ public class LockscreenService extends Service {
         startActivity(startLockscreenActIntent);
     }
 
-
-    private int getIntervalValue(){
-        SharedPreferences sharedPref = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
-        String intervalValue = sharedPref.getString("intervalValue", null);
-        return Integer.parseInt(intervalValue.replace(" мин",""));
-    }
 
 }

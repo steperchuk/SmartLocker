@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private String[] klasses = new String[] { "1 класс", "2 класс", "3 класс", "4 класс", "5 класс", "6 класс", "7 класс" };
 
-    private String[] intervals = new String[] { "1 мин", "15 мин", "30 мин", "45 мин", "60 мин", "90 мин"};
+    private String[] intervals = new String[] { "1 мин", "3 мин", "15 мин", "30 мин", "45 мин", "60 мин", "90 мин"};
 
     Switch enableServiceSwitch;
     Spinner intervalSpinner;
@@ -150,7 +150,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         editor.putString("klass_value", klassSpinner.getSelectedItem().toString());
         editor.putLong("interval", intervalSpinner.getSelectedItemId());
         editor.putString("intervalValue", intervalSpinner.getSelectedItem().toString());
+        editor.putString("tempInterval", intervalSpinner.getSelectedItem().toString());
         editor.commit();
+
     }
 
     private void saveKlass(){

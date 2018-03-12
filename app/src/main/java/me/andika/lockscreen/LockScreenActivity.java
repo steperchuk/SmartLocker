@@ -77,6 +77,10 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_B_Button.setOnClickListener(LockScreenActivity.this);
         answer_C_Button.setOnClickListener(LockScreenActivity.this);
         answer_D_Button.setOnClickListener(LockScreenActivity.this);
+
+        // save 1 min interval
+        Queries.saveTempInterval(getApplicationContext(), 1);
+
     }
 
     @Override
@@ -88,10 +92,16 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         if(buttonText.equals(correctAnswer.trim())){
             //queries.updateAnswerState(question.Table, true, question.Question);
 
+            // save selected in settings interval
+            queries.saveTempInterval(getApplicationContext(), queries.getIntervalValue(getApplicationContext()));
+
             finish();
         }
         else
         {
+            // save 1 min interval
+            Queries.saveTempInterval(getApplicationContext(), 1);
+
             result.setVisibility(View.VISIBLE);
             resultText.setVisibility(View.VISIBLE);
             button.startAnimation(animShake);
