@@ -79,9 +79,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if(LockScreen.getInstance().isActive()){
             enableServiceSwitch.setChecked(true);
             enableServiceSwitch.setText("On");
+            enableService = true;
         }else{
             enableServiceSwitch.setChecked(false);
             enableServiceSwitch.setText("Off");
+            enableService = false;
         }
 
 
@@ -159,7 +161,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         showDesktop();
     }
 
-        private void EnableService(boolean serviceState){
+    private void EnableService(boolean serviceState){
             if(serviceState){
                 LockScreen.getInstance().active();
             }
