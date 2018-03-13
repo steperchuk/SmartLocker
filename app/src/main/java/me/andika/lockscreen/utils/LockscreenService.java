@@ -117,7 +117,7 @@ public class LockscreenService extends Service {
                 new Intent(this, SettingsActivity.class), 0);
 
         Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_phone_lock)
                 .setTicker(text)
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(getText(R.string.app_name))
