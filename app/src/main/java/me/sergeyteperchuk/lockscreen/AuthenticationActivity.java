@@ -1,4 +1,4 @@
-package me.andika.lockscreen;
+package me.sergeyteperchuk.lockscreen;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;

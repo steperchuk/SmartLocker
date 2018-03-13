@@ -1,4 +1,4 @@
-package me.andika.lockscreen;
+package me.sergeyteperchuk.lockscreen;
 
 /**
  * Created by sergeyteperchuk on 3/6/18.

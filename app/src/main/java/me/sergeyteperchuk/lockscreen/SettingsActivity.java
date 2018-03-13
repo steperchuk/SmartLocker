@@ -1,10 +1,8 @@
-package me.andika.lockscreen;
+package me.sergeyteperchuk.lockscreen;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,9 +14,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import javax.xml.datatype.Duration;
-
-import me.andika.lockscreen.utils.LockScreen;
+import me.sergeyteperchuk.lockscreen.utils.LockScreen;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 

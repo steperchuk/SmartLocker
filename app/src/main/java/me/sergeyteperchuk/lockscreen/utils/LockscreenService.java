@@ -1,4 +1,4 @@
-package me.andika.lockscreen.utils;
+package me.sergeyteperchuk.lockscreen.utils;
 
 /**
  * Created by andika on 2/15/17.
@@ -12,18 +12,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import me.andika.lockscreen.LockApplication;
-import me.andika.lockscreen.LockScreenActivity;
-import me.andika.lockscreen.Queries;
-import me.andika.lockscreen.SettingsActivity;
-import me.andika.lockscreen.R;
+import me.sergeyteperchuk.lockscreen.LockApplication;
+import me.sergeyteperchuk.lockscreen.LockScreenActivity;
+import me.sergeyteperchuk.lockscreen.Queries;
+import me.sergeyteperchuk.lockscreen.SettingsActivity;
+import me.sergeyteperchuk.lockscreen.R;
 
 
 public class LockscreenService extends Service {
@@ -112,7 +108,7 @@ public class LockscreenService extends Service {
      * Show a notification while this service is running.
      */
     private void showNotification() {
-        CharSequence text = "Running";
+        CharSequence text = "Работает";
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, SettingsActivity.class), 0);
 

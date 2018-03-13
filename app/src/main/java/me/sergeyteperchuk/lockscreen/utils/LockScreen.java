@@ -1,17 +1,10 @@
-package me.andika.lockscreen.utils;
+package me.sergeyteperchuk.lockscreen.utils;
 
 import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-
-import java.util.List;
-
-import me.andika.lockscreen.LockScreenActivity;
 
 /**
  * Created by andika on 2/19/17.

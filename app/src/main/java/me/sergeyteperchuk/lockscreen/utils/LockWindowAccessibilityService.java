@@ -1,12 +1,10 @@
-package me.andika.lockscreen.utils;
+package me.sergeyteperchuk.lockscreen.utils;
 
 import android.accessibilityservice.AccessibilityService;
-import android.accessibilityservice.AccessibilityServiceInfo;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 
-import me.andika.lockscreen.LockApplication;
+import me.sergeyteperchuk.lockscreen.LockApplication;
 
 /**
  * Created by andika on 2/25/17.

@@ -1,10 +1,9 @@
-package me.andika.lockscreen;
+package me.sergeyteperchuk.lockscreen;
 
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;

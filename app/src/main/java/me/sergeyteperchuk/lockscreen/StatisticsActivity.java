@@ -1,14 +1,9 @@
-package me.andika.lockscreen;
+package me.sergeyteperchuk.lockscreen;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;

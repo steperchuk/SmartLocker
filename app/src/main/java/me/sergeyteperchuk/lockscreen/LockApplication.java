@@ -1,4 +1,4 @@
-package me.andika.lockscreen;
+package me.sergeyteperchuk.lockscreen;
 
 import android.app.Application;
 
