@@ -1,5 +1,8 @@
 package me.andika.lockscreen;
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -54,6 +58,13 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         questionLabel.setText(question.Question);
 
         image = (ImageView) findViewById(R.id.imageQuestion);
+
+        ImageDownloader imageDownloader = new ImageDownloader(getApplicationContext(), new ProgressDialog(LockScreenActivity.this));
+
+        File imgFile = imageDownloader.getImagesFromLocalStorrage().get(0);
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+        image.setImageBitmap(myBitmap);
 
         answer_A_Button = (Button) findViewById(R.id.answer_A_Button);
         answer_B_Button = (Button) findViewById(R.id.answer_B_Button);
