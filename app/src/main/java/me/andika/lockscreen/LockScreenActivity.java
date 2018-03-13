@@ -59,6 +59,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_B_Button = (Button) findViewById(R.id.answer_B_Button);
         answer_C_Button = (Button) findViewById(R.id.answer_C_Button);
         answer_D_Button = (Button) findViewById(R.id.answer_D_Button);
+
+        setQuestionButtonStates(true);
+
         answer_A_Button.setText(question.Answer_A.trim());
         answer_B_Button.setText(question.Answer_B.trim());
         answer_C_Button.setText(question.Answer_C.trim());
@@ -115,6 +118,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             result.setVisibility(View.VISIBLE);
             resultText.setVisibility(View.VISIBLE);
             button.startAnimation(animShake);
+
+            setQuestionButtonStates(false);
 
             setNextQuestion();
         }
@@ -181,6 +186,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             public void run() {
                 question = getRandomQuestion(questions);
                 questionLabel.setText(question.Question);
+
+                setQuestionButtonStates(true);
+
                 answer_A_Button.setText(question.Answer_A.trim());
                 answer_B_Button.setText(question.Answer_B.trim());
                 answer_C_Button.setText(question.Answer_C.trim());
@@ -232,5 +240,12 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         };
 
         t.start();
+    }
+
+    private void setQuestionButtonStates(boolean state){
+        answer_A_Button.setEnabled(state);
+        answer_B_Button.setEnabled(state);
+        answer_C_Button.setEnabled(state);
+        answer_D_Button.setEnabled(state);
     }
 }
