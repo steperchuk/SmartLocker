@@ -23,6 +23,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     TextView questionLabel;
     ImageView image;
 
+    Thread timerThread;
+
     List<Question> questions;
     Question question;
 
@@ -86,8 +88,7 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         // counter disabled. Think it is redundant
         counter = (TextView) findViewById(R.id.counter_label);
         counter.setVisibility(View.INVISIBLE);
-        //counter.setText("60");
-        //updateTimeLeftText();
+        counter.setText("10");
 
         // save 1 min interval
         Queries.saveTempInterval(getApplicationContext(), 1);
@@ -120,6 +121,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             button.startAnimation(animShake);
 
             setQuestionButtonStates(false);
+
+            counter.setVisibility(View.VISIBLE);
+            updateTimeLeftText();
 
             setNextQuestion();
         }
@@ -201,13 +205,22 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
                 resultText.setVisibility(View.INVISIBLE);
 
                 //uncomment if decide to enable counter
-                //counter.setText("60");
+                counter.setText("10");
+                counter.setVisibility(View.INVISIBLE);
+                timerThread.interrupt();
             }
         });
     }
 
+    private void setQuestionButtonStates(boolean state){
+        answer_A_Button.setEnabled(state);
+        answer_B_Button.setEnabled(state);
+        answer_C_Button.setEnabled(state);
+        answer_D_Button.setEnabled(state);
+    }
+
     private void updateTimeLeftText(){
-        Thread t = new Thread() {
+        timerThread = new Thread() {
 
             @Override
             public void run() {
@@ -218,19 +231,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void run() {
                                 int counterValue = Integer.valueOf(counter.getText().toString()) - 1;
-                                if(counterValue >= 0){
+                                if(counterValue > 0){
                                     counter.setText(String.valueOf(counterValue));
                                 }
-                                else{
-                                    result.setVisibility(View.VISIBLE);
-                                    resultText.setVisibility(View.VISIBLE);
-                                    setNextQuestion();
-                                }
-
-                                if(counterValue < 10){
-                                    counter.setTextColor(R.color.warning_color);
-                                }
-
                             }
                         });
                     }
@@ -239,13 +242,6 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             }
         };
 
-        t.start();
-    }
-
-    private void setQuestionButtonStates(boolean state){
-        answer_A_Button.setEnabled(state);
-        answer_B_Button.setEnabled(state);
-        answer_C_Button.setEnabled(state);
-        answer_D_Button.setEnabled(state);
+        timerThread.start();
     }
 }
