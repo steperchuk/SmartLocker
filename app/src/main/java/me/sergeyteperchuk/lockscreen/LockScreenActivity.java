@@ -1,5 +1,6 @@
 package me.sergeyteperchuk.lockscreen;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,8 +38,6 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
     TextView result;
     TextView resultText;
-
-    TextView counter;
 
     Animation animShake;
 
@@ -85,10 +84,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_C_Button.setOnClickListener(LockScreenActivity.this);
         answer_D_Button.setOnClickListener(LockScreenActivity.this);
 
-        // counter disabled. Think it is redundant
-        counter = (TextView) findViewById(R.id.counter_label);
-        counter.setVisibility(View.INVISIBLE);
-        counter.setText("10");
+        image.setImageResource(R.drawable.ic_question);
+
 
         // save 1 min interval
         Queries.saveTempInterval(getApplicationContext(), 1);
@@ -122,8 +119,7 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
             setQuestionButtonStates(false);
 
-            counter.setVisibility(View.VISIBLE);
-            updateTimeLeftText();
+            updateTimeLeftImage();
 
             setNextQuestion();
         }
@@ -204,9 +200,7 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
                 result.setVisibility(View.INVISIBLE);
                 resultText.setVisibility(View.INVISIBLE);
 
-                //uncomment if decide to enable counter
-                counter.setText("10");
-                counter.setVisibility(View.INVISIBLE);
+                image.setImageResource(R.drawable.ic_question);
                 timerThread.interrupt();
             }
         });
@@ -217,12 +211,13 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_B_Button.setEnabled(state);
         answer_C_Button.setEnabled(state);
         answer_D_Button.setEnabled(state);
+
     }
 
-    private void updateTimeLeftText(){
+    private void updateTimeLeftImage() {
         timerThread = new Thread() {
 
-            
+            int imageCount = 10;
 
             @Override
             public void run() {
@@ -232,10 +227,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                int counterValue = Integer.valueOf(counter.getText().toString()) - 1;
-                                if(counterValue > 0){
-                                    counter.setText(String.valueOf(counterValue));
-                                }
+                                --imageCount;
+                                switchImageResources(imageCount);
                             }
                         });
                     }
@@ -246,4 +239,41 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
         timerThread.start();
     }
+
+    private void switchImageResources(int imageId){
+        switch (imageId){
+            case 9:
+                image.setImageResource(R.drawable.ic_nine);
+                break;
+            case 8:
+                image.setImageResource(R.drawable.ic_eight);
+                break;
+            case 7:
+                image.setImageResource(R.drawable.ic_seven);
+                break;
+            case 6:
+                image.setImageResource(R.drawable.ic_six);
+                break;
+            case 5:
+                image.setImageResource(R.drawable.ic_five);
+                break;
+            case 4:
+                image.setImageResource(R.drawable.ic_four);
+                break;
+            case 3:
+                image.setImageResource(R.drawable.ic_three);
+                break;
+            case 2:
+                image.setImageResource(R.drawable.ic_two);
+                break;
+            case 1:
+                image.setImageResource(R.drawable.ic_one);
+                break;
+            case 0:
+                image.setImageResource(R.drawable.ic_zero);
+                break;
+        }
+    }
+
+
 }
