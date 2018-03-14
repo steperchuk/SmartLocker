@@ -3,6 +3,7 @@ package me.sergeyteperchuk.lockscreen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -53,6 +54,7 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
         questionLabel = (TextView) findViewById(R.id.question);
         questionLabel.setText(question.Question);
+        questionLabel.setMovementMethod(new ScrollingMovementMethod());
 
         image = (ImageView) findViewById(R.id.imageQuestion);
 

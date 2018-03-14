@@ -11,12 +11,12 @@
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:maxLines="4"
         android:scrollbars="vertical"
         android:text="Решите уравнение Решите уравнение "
@@ -98,6 +98,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/answer_Result"
         android:text="Верный ответ: х = 2"
+        android:layout_marginBottom="5dp"
         android:textSize="14sp" />
 
 </RelativeLayout>
