@@ -206,8 +206,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
                 result.setVisibility(View.INVISIBLE);
                 resultText.setVisibility(View.INVISIBLE);
 
-                image.setImageResource(R.drawable.ic_question);
                 timerThread.interrupt();
+
+                image.setImageResource(R.drawable.ic_question);
             }
         });
     }
