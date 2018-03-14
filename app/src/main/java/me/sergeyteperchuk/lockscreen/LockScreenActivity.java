@@ -68,6 +68,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_C_Button.setText(question.Answer_C.trim());
         answer_D_Button.setText(question.Answer_D.trim());
 
+        hideButtonsIfNoAnswer(question);
+
         result = (TextView) findViewById(R.id.answer_Result);
         resultText = (TextView) findViewById(R.id.answer_Text);
         resultText.setText(question.Answer_Info);
@@ -194,6 +196,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
                 answer_C_Button.setText(question.Answer_C.trim());
                 answer_D_Button.setText(question.Answer_D.trim());
 
+                hideButtonsIfNoAnswer(question);
+
                 resultText.setText(question.Answer_Info);
                 correctAnswer = question.Correct_Answer.trim();
 
@@ -211,6 +215,11 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         answer_B_Button.setEnabled(state);
         answer_C_Button.setEnabled(state);
         answer_D_Button.setEnabled(state);
+
+        answer_A_Button.setVisibility(View.VISIBLE);
+        answer_B_Button.setVisibility(View.VISIBLE);
+        answer_C_Button.setVisibility(View.VISIBLE);
+        answer_D_Button.setVisibility(View.VISIBLE);
 
     }
 
@@ -272,6 +281,15 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             case 0:
                 image.setImageResource(R.drawable.ic_zero);
                 break;
+        }
+    }
+
+    private void hideButtonsIfNoAnswer(Question question){
+        if(question.Answer_C.isEmpty()){
+            answer_C_Button.setVisibility(View.INVISIBLE);
+        }
+        if(question.Answer_D.isEmpty()){
+            answer_D_Button.setVisibility(View.INVISIBLE);
         }
     }
 

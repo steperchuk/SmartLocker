@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageQuestion"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_button"
         android:text="2"
         android:textSize="14sp" />
@@ -99,17 +99,5 @@
         android:layout_below="@id/answer_Result"
         android:text="Верный ответ: х = 2"
         android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/counter_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/answer_A_Button"
-        android:layout_alignEnd="@+id/answer_A_Button"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="10dp"
-        android:text="60"
-        android:textSize="24sp" />
-
 
 </RelativeLayout>

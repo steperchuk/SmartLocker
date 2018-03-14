@@ -167,7 +167,6 @@ public class Queries {
                     question.Answer_D = userCursor.getString(userCursor.getColumnIndex("Answer_D"));
                     question.Correct_Answer = userCursor.getString(userCursor.getColumnIndex("Correct_Answer"));
                     question.Answer_Info = userCursor.getString(userCursor.getColumnIndex("Answer_Info"));
-                    question.Image = userCursor.getString(userCursor.getColumnIndex("Image_URL"));
                     question.IsAnswered = userCursor.getString(userCursor.getColumnIndex("IsAnswered"));
 
 
