@@ -188,6 +188,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                timerThread.interrupt();
+
                 question = getRandomQuestion(questions);
                 questionLabel.setText(question.Question);
 
@@ -205,8 +208,6 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
                 result.setVisibility(View.INVISIBLE);
                 resultText.setVisibility(View.INVISIBLE);
-
-                timerThread.interrupt();
 
                 image.setImageResource(R.drawable.ic_question);
             }

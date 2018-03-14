@@ -25,7 +25,9 @@
 
         <activity
             android:name="me.sergeyteperchuk.lockscreen.AuthenticationActivity"
-            android:theme="@style/AppThemeNoAction">
+            android:theme="@style/AppThemeNoAction"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,22 +38,30 @@
             android:name="me.sergeyteperchuk.lockscreen.LockScreenActivity"
             android:showOnLockScreen="true"
             android:launchMode="singleInstance"
-            android:theme="@style/AppThemeNoAction">
+            android:theme="@style/AppThemeNoAction"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity android:name="me.sergeyteperchuk.lockscreen.SettingsActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity android:name="me.sergeyteperchuk.lockscreen.SubjectsActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity android:name="me.sergeyteperchuk.lockscreen.StatisticsActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
         <service android:name="me.sergeyteperchuk.lockscreen.utils.LockscreenService" >
