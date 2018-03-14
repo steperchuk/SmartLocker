@@ -222,6 +222,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
     private void updateTimeLeftText(){
         timerThread = new Thread() {
 
+            
+
             @Override
             public void run() {
                 try {
