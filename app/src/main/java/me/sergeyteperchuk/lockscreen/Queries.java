@@ -169,8 +169,9 @@ public class Queries {
                     question.Answer_Info = userCursor.getString(userCursor.getColumnIndex("Answer_Info"));
                     question.IsAnswered = userCursor.getString(userCursor.getColumnIndex("IsAnswered"));
 
-
-                    questions.add(question);
+                    if(question.Question != null){
+                        questions.add(question);
+                    }
 
                 } while (userCursor.moveToNext());
             }

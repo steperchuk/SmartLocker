@@ -134,6 +134,12 @@ public class LockscreenService extends Service {
     }
 
     private void showLockScreen(){
+        Queries queries = new Queries(getApplicationContext());
+        int selectedSubjectsCount = queries.getSubjectsTables(queries.getKlass()).size();
+        if(selectedSubjectsCount == 0){
+            return;
+        }
+
         Intent startLockscreenActIntent = new Intent(mContext, LockScreenActivity.class);
         startLockscreenActIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startLockscreenActIntent);

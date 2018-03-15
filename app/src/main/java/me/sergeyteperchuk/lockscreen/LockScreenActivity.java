@@ -177,6 +177,9 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void run() {
                 // this code will be executed after 10 seconds
+                if(timerThread != null){
+                    timerThread.interrupt();
+                }
                 updateUI();
             }
         }, 10000);
@@ -188,8 +191,6 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                timerThread.interrupt();
 
                 question = getRandomQuestion(questions);
                 questionLabel.setText(question.Question);
