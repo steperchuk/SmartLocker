@@ -1,5 +1,7 @@
 package me.sergeyteperchuk.lockscreen;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +52,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         goToStatisticsButton = (ImageButton) findViewById(R.id.button_statistics);
         changePassButton = (ImageButton) findViewById(R.id.button_change_password);
         startButton = (ImageButton) findViewById(R.id.startButton);
+
+        setButtonAnimation(startButton);
 
 
         goToSubjectsButton.setOnClickListener(SettingsActivity.this);
@@ -233,6 +237,19 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         Intent statistics = new Intent(getApplicationContext(), StatisticsActivity.class);
         statistics.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(statistics);
+    }
+
+    private void setButtonAnimation(ImageButton button){
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                button,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
+        scaleDown.setDuration(310);
+
+        scaleDown.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
+
+        scaleDown.start();
     }
 
 }
