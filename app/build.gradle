@@ -1,14 +1,17 @@
 apply plugin: 'com.android.application'
 
+
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId 'com.st.lockscreen'
+        applicationId 'com.sergeyteperchuk.lockscreen'
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true //important
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,16 +33,34 @@ dependencies {
     compile('com.github.orangegangsters:lollipin:2.0.0@aar') {
         transitive = true
     }
-    testCompile 'junit:junit:4.12'
+    compile 'junit:junit:4.12'
+
+    compile 'com.squareup.picasso:picasso:2.5.2' //for Inmobi
+    compile name: 'adcolony-sdk-3.3.0', ext: 'aar'
+    compile name: 'mobvista-8.3.7-alphab', ext: 'aar'
+    compile name: 'mobvista-8.3.7-appwall', ext: 'aar'
+    compile name: 'mobvista-8.3.7-appwallext', ext: 'aar'
+    compile name: 'mobvista-8.3.7-common', ext: 'aar'
+
+    compile 'com.google.android.gms:play-services-ads:11.0.4'
+    compile 'com.google.android.gms:play-services-location:11.0.4'
+
+
 }
 
 
 allprojects {
     repositories {
+
         maven{
             url "https://github.com/omadahealth/omada-nexus/raw/master/release"
         }
         jcenter()
+
+
+        flatDir {
+            dirs 'libs'
+        }
 
     }
 }
