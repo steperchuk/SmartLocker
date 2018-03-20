@@ -55,9 +55,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
         Appodeal.disableNetwork(this, "mailru");
         Appodeal.disableNetwork(this, "yandex");
-        Appodeal.disableNetwork(this, "mobvista");
+        //Appodeal.disableNetwork(this, "mobvista");
         Appodeal.disableLocationPermissionCheck();
-        Appodeal.initialize(this, appKey, Appodeal.NON_SKIPPABLE_VIDEO | Appodeal.BANNER);
+        Appodeal.initialize(this, appKey, Appodeal.BANNER);
 
         //
 

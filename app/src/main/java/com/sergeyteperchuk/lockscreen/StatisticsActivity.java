@@ -26,7 +26,7 @@ public class StatisticsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        Appodeal.show(this, Appodeal.NON_SKIPPABLE_VIDEO);
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
 
         list = (ListView) findViewById(R.id.statistics_list);
 

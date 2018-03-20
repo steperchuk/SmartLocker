@@ -29,7 +29,7 @@ public class SubjectsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subjects);
 
-        Appodeal.show(this, Appodeal.NON_SKIPPABLE_VIDEO);
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
 
         final Queries queries = new Queries(getApplicationContext());
         final String klass = queries.getKlass();
