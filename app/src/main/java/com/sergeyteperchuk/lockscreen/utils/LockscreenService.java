@@ -1,9 +1,5 @@
 package com.sergeyteperchuk.lockscreen.utils;
 
-/**
- * Created by andika on 2/15/17.
- */
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -65,7 +61,7 @@ public class LockscreenService extends Service {
         super.onCreate();
         mContext = this;
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        showNotification();
+        //showNotification();
     }
 
 
@@ -106,7 +102,7 @@ public class LockscreenService extends Service {
 
     /**
      * Show a notification while this service is running.
-     */
+
     private void showNotification() {
         CharSequence text = "Работает";
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
@@ -124,6 +120,7 @@ public class LockscreenService extends Service {
 
         mNM.notify(((LockApplication) getApplication()).notificationId, notification);
     }
+     */
 
     private boolean shouldShowLockScreen(){
         if(counter == Queries.getTempIntervalValue(getApplicationContext())){
