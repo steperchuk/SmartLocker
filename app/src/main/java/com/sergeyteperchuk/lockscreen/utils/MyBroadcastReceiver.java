@@ -8,11 +8,16 @@ import android.content.SharedPreferences;
 public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+
+
         Intent startServiceIntent = new Intent(context, LockscreenService.class);
+
         if(!getServiceState(context)){
             return;
         }
+
         context.startService(startServiceIntent);
+
     }
 
 
