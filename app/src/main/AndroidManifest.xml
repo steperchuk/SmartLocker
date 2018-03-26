@@ -167,6 +167,8 @@
         <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
         <!--suppress AndroidDomInspection -->
         <service android:name="com.startapp.android.publish.common.metaData.PeriodicJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
+        </receiver>
 
 
         <activity android:name="com.unity3d.ads.adunit.AdUnitActivity"
