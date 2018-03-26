@@ -5,6 +5,7 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -55,6 +56,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         setButtonAnimation(startButton);
 
+        setSwitchTextEmptyForOldAndroidVersions();
 
         goToSubjectsButton.setOnClickListener(SettingsActivity.this);
         goToStatisticsButton.setOnClickListener(SettingsActivity.this);
@@ -79,10 +81,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if(LockScreen.getInstance().isActive()){
             enableServiceSwitch.setChecked(true);
             enableServiceSwitch.setText("On");
+            setSwitchTextEmptyForOldAndroidVersions();
             enableService = true;
         }else{
             enableServiceSwitch.setChecked(false);
             enableServiceSwitch.setText("Off");
+            setSwitchTextEmptyForOldAndroidVersions();
             enableService = false;
         }
 
@@ -93,10 +97,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                     if (checked) {
                         enableService = true;
                         enableServiceSwitch.setText("On");
+                        setSwitchTextEmptyForOldAndroidVersions();
 
                     } else {
                         enableService = false;
                         enableServiceSwitch.setText("Off");
+                        setSwitchTextEmptyForOldAndroidVersions();
                     }
 
             }
@@ -250,6 +256,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
 
         scaleDown.start();
+    }
+
+    private void setSwitchTextEmptyForOldAndroidVersions(){
+        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+            enableServiceSwitch.setText("");
+        }
     }
 
 }
