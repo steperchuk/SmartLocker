@@ -67,7 +67,8 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <receiver android:name="com.sergeyteperchuk.lockscreen.utils.MyBroadcastReceiver">
+        <receiver android:name="com.sergeyteperchuk.lockscreen.receiver.MyBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -166,11 +167,6 @@
         <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
         <!--suppress AndroidDomInspection -->
         <service android:name="com.startapp.android.publish.common.metaData.PeriodicJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
 
         <activity android:name="com.unity3d.ads.adunit.AdUnitActivity"

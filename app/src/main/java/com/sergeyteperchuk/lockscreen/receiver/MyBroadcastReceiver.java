@@ -1,11 +1,14 @@
-package com.sergeyteperchuk.lockscreen.utils;
+package com.sergeyteperchuk.lockscreen.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.sergeyteperchuk.lockscreen.utils.LockscreenService;
+
 public class MyBroadcastReceiver extends BroadcastReceiver {
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
