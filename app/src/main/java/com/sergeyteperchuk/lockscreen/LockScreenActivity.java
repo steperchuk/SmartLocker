@@ -49,6 +49,13 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_screen);
 
+            String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
+            Appodeal.disableNetwork(this, "mailru");
+            Appodeal.disableNetwork(this, "yandex");
+            Appodeal.disableLocationPermissionCheck();
+            Appodeal.initialize(this, appKey, Appodeal.BANNER);
+
+
         //Show banner
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
         //

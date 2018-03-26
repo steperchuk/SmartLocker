@@ -52,12 +52,13 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         //Initialize advertisement
 
-        String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
-        Appodeal.disableNetwork(this, "mailru");
-        Appodeal.disableNetwork(this, "yandex");
-        Appodeal.disableLocationPermissionCheck();
-        Appodeal.initialize(this, appKey, Appodeal.BANNER);
-
+        /*
+            String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
+            Appodeal.disableNetwork(this, "mailru");
+            Appodeal.disableNetwork(this, "yandex");
+            Appodeal.disableLocationPermissionCheck();
+            Appodeal.initialize(this, appKey, Appodeal.BANNER);
+        */
         //
 
         setContentView(R.layout.activity_authentication);
