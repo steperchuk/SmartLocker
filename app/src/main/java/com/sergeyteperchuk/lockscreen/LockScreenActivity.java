@@ -1,6 +1,7 @@
 package com.sergeyteperchuk.lockscreen;
 
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -49,12 +50,14 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_screen);
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
             String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
             Appodeal.disableNetwork(this, "mailru");
             Appodeal.disableNetwork(this, "yandex");
             Appodeal.disableLocationPermissionCheck();
             Appodeal.initialize(this, appKey, Appodeal.BANNER);
-
+        }
 
         //Show banner
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
