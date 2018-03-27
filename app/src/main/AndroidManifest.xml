@@ -135,10 +135,6 @@
         <activity android:name="com.mopub.mobileads.RewardedMraidActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <activity android:name="org.nexage.sourcekit.vast.activity.VASTActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-
         <activity android:name="org.nexage.sourcekit.vast.activity.VPAIDActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
@@ -154,21 +150,7 @@
         <activity android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
             android:theme="@android:style/Theme" />
         <!--suppress AndroidDomInspection -->
-        <activity android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:theme="@android:style/Theme"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <!--suppress AndroidDomInspection -->
-        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
-        <!--suppress AndroidDomInspection -->
-        <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
-        <!--suppress AndroidDomInspection -->
         <service android:name="com.startapp.android.publish.common.metaData.PeriodicJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
-        </receiver>
 
 
         <activity android:name="com.unity3d.ads.adunit.AdUnitActivity"

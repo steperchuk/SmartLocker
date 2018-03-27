@@ -59,15 +59,20 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         //Initialize advertisement
 
-
-        /*
             String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
             Appodeal.disableNetwork(this, "mailru");
             Appodeal.disableNetwork(this, "yandex");
+            Appodeal.disableNetwork(this, "mraid");
+            Appodeal.disableNetwork(this, "aol");
+            Appodeal.disableNetwork(this, "appnexus");
+            Appodeal.disableNetwork(this, "inner-active");
+            Appodeal.disableNetwork(this, "rtbmraid");
+            Appodeal.disableNetwork(this, "openx");
+            Appodeal.disableNetwork(this, "smaato");
+            Appodeal.disableNetwork(this, "startapp");
+            Appodeal.disableNetwork(this, "zplay");
             Appodeal.disableLocationPermissionCheck();
             Appodeal.initialize(this, appKey, Appodeal.BANNER_BOTTOM);
-        */
-
         //
 
         label = (TextView) findViewById(R.id.label);
