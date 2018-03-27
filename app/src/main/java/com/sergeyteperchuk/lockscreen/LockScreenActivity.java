@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
+import com.sergeyteperchuk.lockscreen.utils.LockScreen;
 
 import java.util.List;
 import java.util.Random;
@@ -71,6 +73,8 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         questionLabel = (TextView) findViewById(R.id.question);
         questionLabel.setText(question.Question);
         questionLabel.setMovementMethod(new ScrollingMovementMethod());
+
+        updateLayoutForTables();
 
         image = (ImageView) findViewById(R.id.imageQuestion);
 
@@ -319,5 +323,14 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    private void updateLayoutForTables() {
+        UiUtils uiUtils = new UiUtils();
+        double screenSize = uiUtils.getScreenSize(this);
+        if (screenSize >= 6) {
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) questionLabel.getLayoutParams();
+            params.topMargin = 150;
+            questionLabel.setLayoutParams(params);
+        }
+    }
 
 }

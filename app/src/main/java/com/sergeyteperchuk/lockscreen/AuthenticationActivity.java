@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -64,6 +66,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_authentication);
 
         label = (TextView) findViewById(R.id.label);
+
+        updateLayoutForTables();
 
         one_button = (ImageButton) findViewById(R.id.one_button);
         two_button = (ImageButton) findViewById(R.id.two_button);
@@ -246,6 +250,16 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         settings.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(settings);
         finish();
+    }
+
+    private void updateLayoutForTables(){
+        UiUtils uiUtils = new UiUtils();
+        double screenSize = uiUtils.getScreenSize(this);
+        if(screenSize >= 6){
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) label.getLayoutParams();
+            params.topMargin = 150;
+            label.setLayoutParams(params);
+        }
     }
 
 
