@@ -12,7 +12,9 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
@@ -38,6 +40,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     ImageButton nine_button;
     ImageButton zero_button;
 
+    LinearLayout radio_layout;
+
     RadioButton button_1;
     RadioButton button_2;
     RadioButton button_3;
@@ -51,23 +55,21 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_authentication);
 
         //Initialize advertisement
 
-        /*
+/*
             String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
             Appodeal.disableNetwork(this, "mailru");
             Appodeal.disableNetwork(this, "yandex");
             Appodeal.disableLocationPermissionCheck();
-            Appodeal.initialize(this, appKey, Appodeal.BANNER);
-        */
+            Appodeal.initialize(this, appKey, Appodeal.BANNER_BOTTOM);
+*/
+
         //
 
-        setContentView(R.layout.activity_authentication);
-
         label = (TextView) findViewById(R.id.label);
-
-        updateLayoutForTables();
 
         one_button = (ImageButton) findViewById(R.id.one_button);
         two_button = (ImageButton) findViewById(R.id.two_button);
@@ -80,6 +82,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         nine_button = (ImageButton) findViewById(R.id.nine_button);
         zero_button = (ImageButton) findViewById(R.id.zero_button);
 
+        radio_layout = (LinearLayout) findViewById(R.id.radio_layout);
+
         button_1 = (RadioButton) findViewById(R.id.radioButton_1);
         button_2 = (RadioButton) findViewById(R.id.radioButton_2);
         button_3 = (RadioButton) findViewById(R.id.radioButton_3);
@@ -87,6 +91,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         button_5 = (RadioButton) findViewById(R.id.radioButton_5);
         button_6 = (RadioButton) findViewById(R.id.radioButton_6);
 
+        updateLayoutForTables();
 
         one_button.setOnClickListener(AuthenticationActivity.this);
         two_button.setOnClickListener(AuthenticationActivity.this);
@@ -259,6 +264,10 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) label.getLayoutParams();
             params.topMargin = 150;
             label.setLayoutParams(params);
+
+            ViewGroup.MarginLayoutParams radioGroupParams = (ViewGroup.MarginLayoutParams) radio_layout.getLayoutParams();
+            radioGroupParams.leftMargin = 15;
+            radio_layout.setLayoutParams(radioGroupParams);
         }
     }
 
