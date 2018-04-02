@@ -59,6 +59,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         //Initialize advertisement
 
+        try {
             String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
             Appodeal.disableNetwork(this, "mailru");
             Appodeal.disableNetwork(this, "yandex");
@@ -73,6 +74,12 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             Appodeal.disableNetwork(this, "zplay");
             Appodeal.disableLocationPermissionCheck();
             Appodeal.initialize(this, appKey, Appodeal.BANNER_BOTTOM);
+        }
+        catch (Exception exception)
+        {
+            // ignore
+        }
+
         //
 
         label = (TextView) findViewById(R.id.label);

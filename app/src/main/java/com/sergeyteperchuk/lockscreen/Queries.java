@@ -163,11 +163,17 @@ public class Queries {
                     question.Question = userCursor.getString(userCursor.getColumnIndex("Question"));
                     question.Answer_A = userCursor.getString(userCursor.getColumnIndex("Answer_A"));
                     question.Answer_B = userCursor.getString(userCursor.getColumnIndex("Answer_B"));
-                    question.Answer_C = userCursor.getString(userCursor.getColumnIndex("Answer_C"));
-                    question.Answer_D = userCursor.getString(userCursor.getColumnIndex("Answer_D"));
+                    String answer_c  = userCursor.getString(userCursor.getColumnIndex("Answer_C"));
+                    String answer_d = userCursor.getString(userCursor.getColumnIndex("Answer_D"));
                     question.Correct_Answer = userCursor.getString(userCursor.getColumnIndex("Correct_Answer"));
                     question.Answer_Info = userCursor.getString(userCursor.getColumnIndex("Answer_Info"));
                     question.IsAnswered = userCursor.getString(userCursor.getColumnIndex("IsAnswered"));
+
+                    if(answer_c == null) {question.Answer_C = "";}
+                    else {question.Answer_C = answer_c;}
+
+                    if(answer_d == null) {question.Answer_D = "";}
+                    else {question.Answer_D = answer_d;}
 
                     if(question.Question != null){
                         questions.add(question);

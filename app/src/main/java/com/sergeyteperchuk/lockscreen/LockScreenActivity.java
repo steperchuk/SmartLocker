@@ -54,6 +54,7 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
         //Initialize advertisement
 
+        try {
         String appKey = "5764ecf47984dc0ab3d8bfa22045ca3359e7255a113c781b";
         Appodeal.disableNetwork(this, "mailru");
         Appodeal.disableNetwork(this, "yandex");
@@ -68,6 +69,11 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
         Appodeal.disableNetwork(this, "zplay");
         Appodeal.disableLocationPermissionCheck();
         Appodeal.initialize(this, appKey, Appodeal.BANNER_BOTTOM);
+        }
+        catch (Exception exception)
+        {
+            // ignore
+        }
 
         //
 
@@ -95,12 +101,12 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
         setQuestionButtonStates(true);
 
+        hideButtonsIfNoAnswer(question);
+
         answer_A_Button.setText(question.Answer_A.trim());
         answer_B_Button.setText(question.Answer_B.trim());
         answer_C_Button.setText(question.Answer_C.trim());
         answer_D_Button.setText(question.Answer_D.trim());
-
-        hideButtonsIfNoAnswer(question);
 
         result = (TextView) findViewById(R.id.answer_Result);
         resultText = (TextView) findViewById(R.id.answer_Text);
@@ -232,12 +238,13 @@ public class LockScreenActivity extends AppCompatActivity implements View.OnClic
 
                 setQuestionButtonStates(true);
 
+                hideButtonsIfNoAnswer(question);
+
                 answer_A_Button.setText(question.Answer_A.trim());
                 answer_B_Button.setText(question.Answer_B.trim());
                 answer_C_Button.setText(question.Answer_C.trim());
                 answer_D_Button.setText(question.Answer_D.trim());
 
-                hideButtonsIfNoAnswer(question);
 
                 resultText.setText(question.Answer_Info);
                 correctAnswer = question.Correct_Answer.trim();
